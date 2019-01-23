@@ -1,19 +1,30 @@
 #include<stdio.h>
-void m(int *s,int n){
-  int i,j,k=1,t;
-    for(i=0;i<n;i++)
-      for(j=n-1,k=0;j>i;j--)
-        if(s[j]>s[j-1]){
-          t=s[j];
-          s[j]=s[j-1];
-	      s[j-1]=t;
-	      k++;}
+void towers(int n,char s,char d,char a);
+int main (void){
+   int n;
+   do{
+     scanf("%d",&n);
+   }while(n<1);
+   towers(n,'A','C','B');
+   return 0;
 }
-  int main(){
-    int a[10]={3,2,4,1,7,6,5,8,0,9},i;
-      m(a,10);
-        for(i=0;i<10;i++)
-           printf("%d  ",a[i]);
-    return 0;
+void towers(int n,
+            char source,
+            char dest,
+            char auxiliary)
+{   
+    static int step=0;
+    printf("Towers(%d,%c,%c,%c)\n",n,source,dest,auxiliary);
+    if(n==1)
+       printf("\t\t\t\tstep %3d:Move from %c to %c\n",
+        ++step,source,dest);
+    else{
+       towers(n-1,source,auxiliary,dest);
+       printf("\t\t\t\tstep %3d:Move from %c to %c\n",
+        ++step,source,dest);
+       towers(n-1,auxiliary,dest,source);
 }
+return;
+}
+
 
